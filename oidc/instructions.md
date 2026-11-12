@@ -44,3 +44,24 @@ curl -s -X POST http://localhost:8080/realms/test/protocol/openid-connect/token 
 curl -s http://localhost:8080/realms/test/protocol/openid-connect/userinfo \
   -H "Authorization: Bearer <access_token>"
 ```
+
+
+
+### HTTPS
+
+```
+cloudflared tunnel --protocol http2 --url http://localhost:8080
+
+
+curl -s https://define-raleigh-tells-ton.trycloudflare.com/realms/test/.well-known/openid-configuration | python3 -m json.tool
+
+http://define-raleigh-tells-ton.trycloudflare.com/realms/test/protocol/openid-connect/auth?client_id=oidc-test&response_type=code&scope=openid%20email%20profile&redirect_uri=http://localhost:9010/callback&state=abc123&nonce=n-0S6
+
+curl -s -X POST http://define-raleigh-tells-ton.trycloudflare.com/realms/test/protocol/openid-connect/token \
+  -d grant_type=authorization_code -d client_id=oidc-test \
+  -d code=40b167b3-9b52-5431-5bef-67f22da4f906.iR98Cp6YDPTK2BDb8yCLkCWK.69096c6f-4114-4ec0-b366-1a4a2ee61cb2 -d redirect_uri=http://localhost:9010/callback
+
+curl -s http://define-raleigh-tells-ton.trycloudflare.com/realms/test/protocol/openid-connect/userinfo \
+  -H "Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0MElNR3o4MFZ1SVZLNlNxYmtmeDM0WlczWVQwVFBWbzdkVEtsYWpqRjNRIn0.eyJleHAiOjE3OTQ0NTA3NTksImlhdCI6MTc5NDQ1MDQ1OSwiYXV0aF90aW1lIjoxNzk0NDUwMjQ1LCJqdGkiOiJvbnJ0YWM6NTYzNDIwYzktMjFlMS00NWQ4LWM0YzUtODI3MjVmMTE1OTQ4IiwiaXNzIjoiaHR0cHM6Ly9kZWZpbmUtcmFsZWlnaC10ZWxscy10b24udHJ5Y2xvdWRmbGFyZS5jb20vcmVhbG1zL3Rlc3QiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiOWFjODVkMzQtNWM5MS00MmVjLWJmYmYtOGUzZTFlOGQ2N2NmIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoib2lkYy10ZXN0Iiwic2lkIjoiaVI5OENwNllEUFRLMkJEYjh5Q0xrQ1dLIiwiYWNyIjoiMCIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXRlc3QiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkFsaWNlIFRlc3QiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhbGljZSIsImdpdmVuX25hbWUiOiJBbGljZSIsImZhbWlseV9uYW1lIjoiVGVzdCIsImVtYWlsIjoiYWxpY2VAZXhhbXBsZS5jb20ifQ.OzdWNcd29fte4u7co2h01qF9rF0m6FN-SIMSIDTLNRp--oXN27_rWMMP-swpu6M0hy8jvJZFMZwBWQCdEdT4hDGw-1TBiSyOQYqoLqy1LV6bLlf0mNSqeN5T1hEXhz0c09I7TuMs9Qotth6naayz7Qj1On1cuJYQ7KgC_l1zHbtjrlbiI4oEMzAcqf8o1cp6DxuGHgZnMWnGwDIWDTamtVWm1welRs4FCSRRl8pNbuB-or4Z_Rozb9EQuIFNJIFoddj2nfFlnePCpLvyopn6r_7EuNktWCvjB-kkENORi8thhw0X0Mhjk9aT7m5WwfmQ9UvXaRCXivdwUDearA16Kw"
+
+```

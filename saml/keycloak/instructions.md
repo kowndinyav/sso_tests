@@ -48,3 +48,29 @@ curl -o sp.xml http://localhost:9009/saml/metadata
 - In the tracer, find the entries marked SAML. The first is the AuthnRequest (step 3 of the diagram), and the POST to `/saml/acs` carries the SAMLResponse (step 6).
 
 If step 6 shows an error, paste it here and I'll help debug. Signature and audience mismatches are the usual causes.
+
+
+
+### HTTPS
+
+```
+cloudflared tunnel --protocol http2 --url http://localhost:8080
+
+
+docker run -p 8080:8080 \
+  -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin \
+  -e KC_HOSTNAME=https://define-raleigh-tells-ton.trycloudflare.com \
+  -e KC_PROXY_HEADERS=xforwarded \
+  -e KC_HTTP_ENABLED=true \
+  quay.io/keycloak/keycloak:latest start-dev
+
+
+mkdir ./idp-meta && cd ./idp-meta
+ curl -o idp.xml https://define-raleigh-tells-ton.trycloudflare.com/realms/test/protocol/saml/descriptor
+ python3 -m http.server 8000 --bind 127.0.0.1
+
+
+ 
+
+
+```
