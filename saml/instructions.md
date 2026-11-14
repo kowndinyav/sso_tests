@@ -6,6 +6,7 @@ You'll run two things locally with Docker, an IdP (Keycloak) and a tiny test SP,
 docker run -p 8080:8080 \
   -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin \
   quay.io/keycloak/keycloak:latest start-dev
+
 ```
 
 Open http://localhost:8080 and log in as `admin` / `admin`.
@@ -56,21 +57,31 @@ If step 6 shows an error, paste it here and I'll help debug. Signature and audie
 ```
 cloudflared tunnel --protocol http2 --url http://localhost:8080
 
+ngrok http 8080 --url https://radiogenic-rossana-nondefiling.ngrok-free.dev
+
+Open http://localhost:8080 and log in as `admin` / `admin`.
+
+Create a realm and a user
+- Create a realm named `test`.
+- Under Users, add `alice`. In Credentials, set a password with Temporary turned off.
+
+
 
 docker run -p 8080:8080 \
   -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin \
-  -e KC_HOSTNAME=https://define-raleigh-tells-ton.trycloudflare.com \
+  -e KC_HOSTNAME=https://radiogenic-rossana-nondefiling.ngrok-free.dev \
   -e KC_PROXY_HEADERS=xforwarded \
   -e KC_HTTP_ENABLED=true \
   quay.io/keycloak/keycloak:latest start-dev
 
 
-mkdir ./idp-meta && cd ./idp-meta
- curl -o idp.xml https://define-raleigh-tells-ton.trycloudflare.com/realms/test/protocol/saml/descriptor
- python3 -m http.server 8000 --bind 127.0.0.1
+cd /Users/kowndiny/work/github_personal/sso_tests/saml/keycloak/idp-meta
+rn -rf idp.xml
+curl -o idp.xml https://define-raleigh-tells-ton.trycloudflare.com/realms/test/protocol/saml/descriptor
+python3 -m http.server 8000 --bind 127.0.0.1
 
 
- 
+
 
 
 ```
