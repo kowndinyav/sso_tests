@@ -1,4 +1,3 @@
-
 # Static domain setup
 ```
 ngrok config add-authtoken 2B61NnXtbIR3wEs4wBYxhMvojQD_HqjxeCej45N4gBYA2S5A
