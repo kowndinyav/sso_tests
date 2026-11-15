@@ -1,6 +1,6 @@
 # Start SAML IdP
 ```
-docker run -p 8080:8080 \
+docker run --name keycloak -p 8080:8080 \
   -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin \
   -e KC_HOSTNAME=https://radiogenic-rossana-nondefiling.ngrok-free.dev \
   -e KC_PROXY_HEADERS=xforwarded \

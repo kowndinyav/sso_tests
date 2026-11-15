@@ -3,7 +3,7 @@ You'll run two things locally with Docker, an IdP (Keycloak) and a tiny test SP,
 **1. Start the IdP (Keycloak)**
 
 ```
-docker run -p 8080:8080 \
+docker run --name keycloak -p 8080:8080 \
   -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin \
   quay.io/keycloak/keycloak:latest start-dev
 ```

@@ -3,7 +3,7 @@ You'll run two things locally with Docker, an IdP (Keycloak) and a tiny test SP,
 ### Step 1 - Run IDP (Keycloak)
 
 ```
-docker run -p 8080:8080 \
+docker run --name keycloak -p 8080:8080 \
   -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin \
   -e KC_HOSTNAME=https://radiogenic-rossana-nondefiling.ngrok-free.dev \
   -e KC_PROXY_HEADERS=xforwarded \
@@ -51,5 +51,6 @@ curl -s https://radiogenic-rossana-nondefiling.ngrok-free.dev/realms/test/protoc
 
 ### Read the IdP's "metadata"**
 ```
+curl -s https://radiogenic-rossana-nondefiling.ngrok-free.dev/realms/test/.well-known/openid-configuration | python3 -m json.tool
 curl -s https://radiogenic-rossana-nondefiling.ngrok-free.dev/realms/test/.well-known/openid-configuration | python3 -m json.tool
 ```
