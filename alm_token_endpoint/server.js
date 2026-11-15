@@ -15,7 +15,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ISSUER = process.env.ISSUER || "https://radiogenic-rossana-nondefiling.ngrok-free.dev";
-const AUDIENCE = process.env.AUDIENCE || "boomi-spaces"; // confirm the real value with Boomi
+const AUDIENCE = process.env.AUDIENCE || "alm-integration"; // confirm the real value with Boomi
 const PUBLIC_PORT = 8081;
 const MINT_PORT = 8082;
 
