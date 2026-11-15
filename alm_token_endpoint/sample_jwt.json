@@ -1,0 +1,21 @@
+{
+    "exp": 1794709571,
+    "iat": 1794709271,
+    "auth_time": 1794709270,
+    "jti": "95d06f10-5803-02d9-994a-e4bf1184b226",
+    "iss": "https://radiogenic-rossana-nondefiling.ngrok-free.dev/realms/test",
+    "aud": "oidc-test",
+    "sub": "be2f606f-93eb-4afd-8e2d-044c75bb97f9",
+    "typ": "ID",
+    "azp": "oidc-test",
+    "sid": "8jbvjhbnzOe6sJPU2G5gGDoz",
+    "at_hash": "gJJ_1TnjfBgxD8FgL6DBGg",
+    "acr": "1",
+    "email_verified": false,
+    "name": "mohit m",
+    "preferred_username": "mohit",
+    "given_name": "mohit",
+    "family_name": "m",
+    "email": "mmallampati@adobe.com"
+  }
+  
