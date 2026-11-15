@@ -24,20 +24,37 @@ placeholder
 ```
 - Clients → Create client. Client type OpenID Connect, Client ID `oidc-test`.
 - Capability config: **Client authentication Off** (a public client, so no secret is needed), **Standard flow** on.
-- Valid redirect URIs: `http://localhost:9010/callback`. Save.
+- Valid redirect URIs: `http://localhost:3000/callback`. Save.
 ```
 
+
+### Automatic login and token exchange
+
+After creating realm `test`, a test user, and the client above, run:
+
+```bash
+python3 server.py
+```
+
+Open http://localhost:3000/login and log in on Keycloak. The backend receives
+the callback, exchanges the code, and displays the **access token** and **ID token**
+in your browser. No copying codes or running curl is needed. Stop with Ctrl+C.
+
+This is a local sample without PKCE or state/nonce validation, not a production
+login implementation. Tokens are sensitive; do not share the page or screenshots.
+
+The manual steps below are still available for inspecting the flow.
 
 ### Step 4 - Login
 ```
-https://radiogenic-rossana-nondefiling.ngrok-free.dev/realms/test/protocol/openid-connect/auth?client_id=oidc-test&response_type=code&scope=openid%20email%20profile&redirect_uri=http://localhost:9010/callback&state=abc123&nonce=n-0S6
+https://radiogenic-rossana-nondefiling.ngrok-free.dev/realms/test/protocol/openid-connect/auth?client_id=oidc-test&response_type=code&scope=openid%20email%20profile&redirect_uri=http://localhost:3000/callback&state=abc123&nonce=n-0S6
 ```
 
 ### Step 5 - Get Token
 ```
 curl -s -X POST https://radiogenic-rossana-nondefiling.ngrok-free.dev/realms/test/protocol/openid-connect/token \
   -d grant_type=authorization_code -d client_id=oidc-test \
-  -d code=PASTE_CODE -d redirect_uri=http://localhost:9010/callback
+  -d code=PASTE_CODE -d redirect_uri=http://localhost:3000/callback
 ```
 
 ### Step 6 - Get User Info
