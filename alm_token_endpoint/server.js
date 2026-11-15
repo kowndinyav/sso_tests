@@ -14,7 +14,7 @@ import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const ISSUER = process.env.ISSUER || "https://radiogenic-rossana-nondefiling.ngrok-free.dev";
+const ISSUER = process.env.ISSUER || "https://radiogenic-rossana-nondefiling.ngrok-free.dev/realms/test";
 const AUDIENCE = process.env.AUDIENCE || "alm-integration"; // confirm the real value with Boomi
 const PUBLIC_PORT = 8081;
 const MINT_PORT = 8082;
@@ -68,7 +68,7 @@ http
   .createServer((req, res) => {
     logRequest(req, res);
     const url = new URL(req.url, "http://x");
-    if (req.method === "GET" && url.pathname === "/.well-known/jwks.json") {
+    if (req.method === "GET" && url.pathname === "/realms/test/.well-known/jwks.json") {
       res.writeHead(200, { "Content-Type": "application/json", "Cache-Control": "public, max-age=300" });
       return res.end(JWKS);
     }
